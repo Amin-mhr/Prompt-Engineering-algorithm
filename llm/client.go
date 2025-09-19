@@ -2,15 +2,22 @@ package llm
 
 import (
 	"context"
-	"os"
-
+	"fmt"
+	"github.com/joho/godotenv"
 	openai "github.com/sashabaranov/go-openai"
+	"os"
 )
 
 type Usage struct {
 	PromptTokens     int
 	CompletionTokens int
 	TotalTokens      int
+}
+
+func init() {
+	if err := godotenv.Load(".env"); err != nil {
+		fmt.Println("llm: .env not loaded — relying on environment variables if set")
+	}
 }
 
 // model: مثلا "gpt-4o-mini"  | temperature: 0.0..2.0

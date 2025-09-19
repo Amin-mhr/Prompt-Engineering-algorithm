@@ -14,9 +14,9 @@ import (
 
 func main() {
 	// Flags
-	method := flag.String("method", "zero-shot", "prompting method: zero-shot | zero-shot-cot | few-shot | ahdiq")
+	method := flag.String("method", "zero-shot", "prompting method: zero-shot | cot | few-shot | adihq")
 	model := flag.String("model", "gpt-4o-mini", "LLM model name")
-	temperature := flag.Float64("temperature", 0.2, "sampling temperature (0.0 - 2.0)")
+	temperature := flag.Float64("temperature", 0.0, "sampling temperature (0.0 - 2.0)")
 	questionFlag := flag.String("question", "", "question text (if empty, read from stdin)")
 	flag.Parse()
 
@@ -36,14 +36,14 @@ func main() {
 	switch *method {
 	case "zero-shot":
 		prompt = prompts.BuildZeroShotPrompt(question)
-	case "zero-shot-cot":
-		prompt = prompts.BuildZeroShotCotPrompt(question)
+	case "cot":
+		prompt = prompts.BuildCotPrompt(question)
 	case "few-shot":
 		prompt = prompts.BuildFewShotPrompt(question)
 	case "ahdiq":
-		prompt = prompts.BuildAhdiqPrompt(question)
+		prompt = prompts.BuildAdihqPrompt(question)
 	default:
-		fmt.Println("روش ناشناخته! از بین: zero-shot | zero-shot-cot | few-shot | ahdiq")
+		fmt.Println("روش ناشناخته! از بین: zero-shot | cot | few-shot | adihq")
 		return
 	}
 
