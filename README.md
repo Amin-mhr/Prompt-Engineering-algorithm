@@ -68,6 +68,42 @@ go run main.go \
 --temperature=0.2 \
 --question="Given an array of integers, return the two numbers that sum to a target."
 
+go run main.go \
+--method=few-shot \
+--fewshot=dynamic \
+--model=gpt-4o-mini \
+--exemplar-temperature=0.6 \
+--temperature=0.2 \
+--question="Given an integer array nums and an integer k, return the number of subarrays with sum equal to k."
+
+# Zero-Shot (پیش‌فرض‌ها، سؤال از فلگ)
+go run main.go --method=zero-shot --model=gpt-4o-mini --temperature=0.2 \
+--question="Find the length of the longest substring without repeating characters."
+
+# CoT
+go run main.go --method=cot --model=gpt-4o-mini --temperature=0.2 \
+--question="Given a rotated sorted array, return the index of target or -1."
+
+# ADIHQ
+go run main.go --method=adihq --model=gpt-4o-mini --temperature=0.2 \
+--question="Merge overlapping intervals and return the merged list."
+
+# Few-Shot (repo-based)
+go run main.go --method=few-shot --fewshot=repo --model=gpt-4o-mini --temperature=0.2 \
+--question="Given two strings s and t, return true if t is an anagram of s."
+
+# auto
+go run main.go \
+--method=auto \
+--router=hybrid \
+--router-threshold=0.7 \
+--fewshot=repo \
+--model=gpt-4o-mini \
+--temperature=0.2 \
+--question="Given an array of integers, return the number of subarrays with sum equal to k."
+
+
+
 ⚙️ CLI Flags
 Flag	Type	Default	Description
 --method	string	zero-shot	Prompting method: zero-shot, cot, few-shot, ahdiq
